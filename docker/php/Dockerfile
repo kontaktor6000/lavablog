@@ -7,6 +7,7 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mysqli
 RUN apt-get install -y zlib1g-dev
 RUN docker-php-ext-install zip
+RUN apt-get install libcurl3-dev
 
 RUN apt-get update
 RUN apt-get install -y
