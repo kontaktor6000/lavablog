@@ -40,11 +40,27 @@ class WeatherController extends Controller
     }
 
     public function choosedCityNameAction(Request $request) {
+        $ch = curl_init();
+        $appId = config('weather.appId');
+        $weatherSite = config('weather.weatherSite');
+        $cityNameList = config('weather.cityNameList');
 
-        $name = $request->input('city');
-        var_dump($name);die;
+        //print_r($request->all());
+        $city = $request->input('city');
+        //var_dump($city);die;
 
-/*        $data = [
+
+        $format = "%s?q=%s&APPID=%s";
+        $url = sprintf($format, $weatherSite, $city, $appId);
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        $weatherData = curl_exec($ch);
+        $weatherData = json_decode($weatherData, true);
+
+        $data = [
             'title' => 'Погода в городе - ' . $city,
             'description' => 'Температура, давление, направление и скорость ветра в городе ' . $city,
             'city' => $city,
@@ -52,7 +68,7 @@ class WeatherController extends Controller
             'cityNameList' => $cityNameList,
         ];
 
-        return view('weather', $data);*/
+        return view('weather', $data);
     }
 
 }

@@ -8,7 +8,7 @@ return [
         0 => 'London',
         1 => 'Kiev',
         2 => 'Chernihiv',
-        3 => 'Moskow',
+        3 => 'Moscow',
         4 => 'Toronto',
         5 => 'Paris',
     ]

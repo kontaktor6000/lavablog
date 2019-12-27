@@ -6,6 +6,7 @@
 
         <title>{{$title}}</title>
         <meta name="description" content="{{$description}}" >
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -99,13 +100,14 @@
                 </div>
                 <div class="links">
                     <form action="" method="post">
+
                         <select name="city" id="">
                             <option disabled>Выберите город</option>
                             @foreach ($cityNameList as $city)
                                 <option value="{{$city}}">{{$city}}</option>
                             @endforeach
                         </select>
-                        <input type="button" value="Подтвердить выбор">
+                        <input type="submit" value="Подтвердить выбор">
                     </form>
                 </div>
 
