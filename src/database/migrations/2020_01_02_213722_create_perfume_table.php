@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParfumeTable extends Migration
+class CreatePerfumeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateParfumeTable extends Migration
      */
     public function up()
     {
-        Schema::create('parfume', function (Blueprint $table) {
+        Schema::create('perfume', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_category');
+            $table->integer('id_category')->unsigned();
+            $table->foreign('id_category')->references('id')->on('perfume_categories');
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('description');
@@ -32,6 +33,7 @@ class CreateParfumeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parfume');
+        Schema::dropIfExists('perfume');
     }
 }
+

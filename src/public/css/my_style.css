@@ -1,0 +1,22 @@
+.error_message {
+    margin-top:-8px;
+    margin-bottom: 25px;
+    padding:10px;
+    color: #761b18;
+    background:darksalmon;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.alert_success {
+    font-weight:500;
+    color:#1d643b;
+    background:#38c172;
+    padding:10px;
+    margin:10px;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+
