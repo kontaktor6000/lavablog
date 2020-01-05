@@ -8,6 +8,6 @@ Route::get('/', function () {
 });
 
 Route::get('/perfume', [PerfumeController::class, 'indexAction']);
-Route::get('/add_perfume', [PerfumeController::class, 'createPerfumeAction']);
 
-Route::post('/add_perfume', [PerfumeController::class, 'addPerfumeAction']);
+Route::get('/add_perfume', 'PerfumeController@createPerfumeAction')->name('create_perfume');
+Route::post('/add_perfume', 'PerfumeController@addPerfumeAction')->name('add_perfume');

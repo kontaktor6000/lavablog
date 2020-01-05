@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Perfume;
 use App\Http\Models\PerfumeCategory;
+use App\Http\Requests\PerfumeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\ValidationException;
+use Validator;
 
 class PerfumeController extends Controller
 {
@@ -30,7 +32,7 @@ class PerfumeController extends Controller
         return view('add_perfume', ['perfumeCategoryList' => $perfumeCategoryList]);
     }
 
-    public function addPerfumeAction(Request $request)
+    public function addPerfumeAction(PerfumeRequest $request)
     {
         /*      1) Валидация полей
                 имя - от трех до 10 символов любых
@@ -43,15 +45,6 @@ class PerfumeController extends Controller
                 если какое то поле не заполнено и нажали кнопку создать
                 то мы должны увидеть ошибки возле каждого поля о том что пошло не так
         */
-
-        $request->validate([
-            'name'                => 'required|min:3|max:10',
-            'slug'                => 'required|string|min:3|max:10',
-            'description'         => 'required|min:10',
-            'big_icon'            => 'required|image',
-            'small_icon'          => 'required|image',
-            'category'            => 'required|integer|exists:perfume_categories,id',
-        ]);
 
         $perfume = new Perfume();
         $perfume->name = $request->name;

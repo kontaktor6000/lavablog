@@ -39,11 +39,21 @@
             <h2 class="main__title">Добавить запах</h2>
             <div id="modalAdd">
 
-                <form method="post" action="" id="perfume_form" class="main__add" enctype="multipart/form-data" >
+{{--                @if (count($errors))
+                    <div class="error_message">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error  }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif--}}
+
+                <form method="post" action=" {{ route('add_perfume')  }} " id="perfume_form" class="main__add" enctype="multipart/form-data" >
                     @csrf
                     <div class=" main__item">
                         <label class="main__clause">Имя </label>
-                        <input value="{{ old('name') }}" id="name" name="name" type="text" class="main__input" placeholder="Введите имя" required>
+                        <input value="{{ old('name') }}" id="name" name="name" type="text" class="main__input" placeholder="Введите имя" >
                     </div>
                     @if ($errors->has('name'))
                     <div class="error_message">
@@ -53,7 +63,7 @@
 
                     <div class="main__item">
                         <label class="main__clause">Slug </label>
-                        <input value="{{ old('slug') }}" id="slug" name="slug" type="text" class="main__input" placeholder="Введите slug" required>
+                        <input value="{{ old('slug') }}" id="slug" name="slug" type="text" class="main__input" placeholder="Введите slug" >
                     </div>
                     @if ($errors->has('slug'))
                     <div class="error_message">
@@ -64,7 +74,7 @@
                     <div class=" main__item">
                         <label class="main__clause">Описание </label>
                         <textarea id="description" rows="10" name="description" class="main__input"
-                                  placeholder="Введите описание" required>{{ old('description') }}</textarea>
+                                  placeholder="Введите описание" >{{ old('description') }}</textarea>
                     </div>
                     @if ($errors->has('description'))
                     <div class="error_message">
@@ -74,7 +84,7 @@
 
                     <div class=" main__item">
                         <label id="big_icon_label" class="main__clause">Большая иконка</label>
-                        <input value="{{ old('big_icon') }}" id="big_icon" name="big_icon" type="file" required>
+                        <input value="{{ old('big_icon') }}" id="big_icon" name="big_icon" type="file" >
                     </div>
                     @if ($errors->has('big_icon'))
                     <div class="error_message">
@@ -84,7 +94,7 @@
 
                     <div class=" main__item">
                         <label id="small_icon_label" class="main__clause">Маленькая иконка </label>
-                        <input value="{{ old('small_icon') }}" id="small_icon" name="small_icon" type="file" required>
+                        <input value="{{ old('small_icon') }}" id="small_icon" name="small_icon" type="file" >
                     </div>
                     @if ($errors->has('small_icon'))
                     <div class="error_message">
@@ -116,18 +126,6 @@
                         <button id="save_perfumes_button" type="submit" class="main__save">Сохранить</button>
                     </div>
                 </form>
-
-
-
-{{--                @if (count($errors))
-                    <div class="error_message">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error  }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif--}}
 
             </div>
         </div>
