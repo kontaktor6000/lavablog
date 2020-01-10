@@ -13,6 +13,8 @@
                       h3">Создание фейкового пользователя</p>
     </div>
 
+
+
     <form action="{{ route('store_new_client') }}"
           method="post"
           enctype="multipart/form-data"
@@ -48,7 +50,7 @@
         <div class="form-group">
             <label for="dateBirthday">Дата рождения</label>
             <input type="date"
-                   name="day_of_birth"
+                   name="date_of_birth"
                    id="dateBirthday"
                    class="form-control">
         </div>
@@ -56,10 +58,11 @@
         <div class="form-group">
             <label for="userGender">Пол</label>
             <select id="userGender"
+                    type="enum"
                     name="gender"
                     class="form-control">
-                <option>Мужской</option>
-                <option>Женский</option>
+                <option value="m">Мужской</option>
+                <option value="w">Женский</option>
             </select>
         </div>
 
@@ -69,7 +72,7 @@
                     name="country"
                     class="form-control">
                 @foreach($countries as $country)
-                <option>Страна 1</option>
+                <option value="{{ $country->id }}">{{ $country->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -77,10 +80,10 @@
         <div class="form-group">
             <label for="userCity">Город</label>
             <select id="userCity"
-                    name="city"
+                    name="city_id"
                     class="form-control">
-                @foreach($countries as $country)
-                    <option>City 1</option>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name}}</option>
                 @endforeach
             </select>
 
