@@ -11,25 +11,10 @@
 |
 */
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('check.age');
-
-
-
-Route::prefix('admin')->middleware('check.age')->group(function() {
-    Route::get('/test', function () {
-        echo 'asdfasdf';
-    });
 });
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 
