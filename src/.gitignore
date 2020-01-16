@@ -10,3 +10,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/data
+/data2
+/data3
+/../data2
+/../data3

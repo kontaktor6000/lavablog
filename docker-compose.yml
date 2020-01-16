@@ -53,6 +53,41 @@ services:
       - "MYSQL_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASSWORD}"
     networks:
       - internal
+
+  mysql2:
+    container_name: mysql2
+    domainname: mysql2
+    hostname: mysql2
+    image: mysql:5.7
+    volumes:
+      - "./data2/mysql:/var/lib/mysql"
+      - "./docker/mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf"
+      - "./docker/mysql/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf"
+    environment:
+      - "MYSQL_DATABASE=${MYSQL_DB_NAME}"
+      - "MYSQL_USER=${MYSQL_DB_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASSWORD}"
+    networks:
+      - internal
+
+  mysql3:
+    container_name: mysql3
+    domainname: mysql3
+    hostname: mysql3
+    image: mysql:5.7
+    volumes:
+      - "./data3/mysql:/var/lib/mysql"
+      - "./docker/mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf"
+      - "./docker/mysql/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf"
+    environment:
+      - "MYSQL_DATABASE=${MYSQL_DB_NAME}"
+      - "MYSQL_USER=${MYSQL_DB_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_DB_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASSWORD}"
+    networks:
+      - internal
+
   phpmyadmin:
     container_name: pma
     domainname: pma
@@ -61,7 +96,7 @@ services:
     links:
       - mysql:mysql
     environment:
-      PMA_HOST: mysql
+      PMA_HOSTS: mysql,mysql2,mysql3
       PMA_PORT: 3306
     depends_on:
       - mysql
