@@ -10,8 +10,8 @@ class Country extends Model
 
     public $guarded = [];
 
-    public function cities()
+    public function city()
     {
-        return $this->hasMany(City::class);
+        return $this->hasMany(City::class, 'country_id', 'id');
     }
 }

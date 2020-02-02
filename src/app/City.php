@@ -10,13 +10,16 @@ class City extends Model
 
     public $guarded = [];
 
-    public function countries()
+    public function publishingHouse()
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasMany('App\PublishingHouse', 'city_id', 'id');
     }
 
-    public function publishingHouses()
+    public function country()
     {
-        return $this->hasMany(PublishingHouse::class);
+        return $this->belongsTo('App\Country', 'country_id', 'id');
     }
+
+
+
 }

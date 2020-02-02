@@ -10,13 +10,18 @@ class PublishingHouse extends Model
 
     public $guarded = [];
 
-    public function cities()
+    public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo('App\City', 'city_id', 'id');
     }
 
-    public function owners()
+    public function owner()
     {
-        return $this->belongsTo(Owner::class);
+        return $this->belongsTo('App\Owner', 'owner_id', 'id');
+    }
+
+    public function book()
+    {
+        return $this->hasMany('App\Book', 'publishing_house_id', 'id');
     }
 }

@@ -10,8 +10,8 @@ class Owner extends Model
 
     public $guarded = [];
 
-    public function publishingHouses()
+    public function publishing()
     {
-        return $this->hasMany(PublishingHouse::class);
+        return $this->hasMany(PublishingHouse::class, 'owner_id', 'id');
     }
 }
