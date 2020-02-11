@@ -16,15 +16,43 @@
                     </form>
                 </div>
             </section>
+
+            <section>
+                <div class="search col-md-12">
+
+                    <form  action="{{--{{ route('search_with_selection) }}--}}" method="get" class="search-form">
+                        <div class="form-group">
+                            <label for="book_name">Название книги</label>
+                            <input type="text" name="book_name"  class="form-control"placeholder="Мастер и ламастер">
+                        </div>
+                        <div class="form-group">
+                            <label for="book_name">Автор</label>
+                            <input type="text" name="book_author"  class="form-control"placeholder="Бурлаков Толпа">
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Example select</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+
+                </div>
+            </section>
+
             <section>
                 <h1 class="col-md-12">Список книг</h1>
             </section>
 
-            <div class="col-md-12">
+{{--            <div class="col-md-12">
             @if (Session::has('flash_add_smell'))
                 <div class="alert_success">{{ Session::get('flash_add_smell')  }}</div>
             @endif
-            </div>
+            </div>--}}
             <div><a href="{{ route('add_book') }}" class="btn btn-dark">Добавить новую книгу</a></div>
             <table class="table">
                 <thead class="thead-dark">

@@ -12,7 +12,6 @@ class OwnerController extends Controller
     {
         $owners = Owner::get();
         $publishingHouses = PublishingHouse::get();
-        //dd($ph_id);
 
         return view('owners.owners_list', [
             'owners' => $owners,

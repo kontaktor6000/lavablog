@@ -10,6 +10,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Владелец</th>
                     <th scope="col"><a href="{{ route('publishing_houses_list') }}">Издательский дом</a></th>
+                    <th scope="col"><a href="{{ route('books_list') }}">Книги</a></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,7 +26,9 @@
                                 @endforeach
                             </ul>
                         </td>
+                        <td>{{ $owner->books->count() }}</td>
                     </tr>
+
                 @endforeach
                 </tbody>
             </table>

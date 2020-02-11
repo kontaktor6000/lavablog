@@ -32,9 +32,9 @@ class BookSearchRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'                              => 'Поле :attribute обязательно для заполнения',
-            'min'                                   => 'Поле :attribute должно содержать не менее 3-х символов',
-            'max'                                   => 'Поле :attribute должно содержать не более 100 символов',
+            'required' => 'Поле :attribute обязательно для заполнения',
+            'min'      => 'Поле :attribute должно содержать не менее 3-х символов',
+            'max'      => 'Поле :attribute должно содержать не более 100 символов',
         ];
     }
 

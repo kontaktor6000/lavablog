@@ -12,11 +12,13 @@ class PublishingHouseController extends Controller
     {
         $publishingHousesList = PublishingHouse::with(['owner', 'city'])->get();
 
-        $cities = City::get();
+        //$cities = City::get();
+
+        //dd($publishingHousesList);
 
         return view('publishing_house.publishing_houses', [
             'publishingHousesList' => $publishingHousesList,
-            'cities'               => $cities,
+            //'cities'               => $cities,
             ]);
     }
 

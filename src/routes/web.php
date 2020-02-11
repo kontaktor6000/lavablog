@@ -41,7 +41,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'BookController@search')->name('search');
+Route::get('/search_with_selection', 'BookController@searchWithSelection')->name('search_with_selection');
+
 
 Route::get('/scaner', 'ScanController@scan')->name('scaner_book');
+Route::get('/parser', 'ParserController@parser')->name('parser_book');
+
+Route::get('/whoisthis', 'WhoisthisController@whoIsThis')->name('whoisthis');
+
+
 
 
