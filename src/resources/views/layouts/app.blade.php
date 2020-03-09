@@ -12,12 +12,17 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    @stack('scripts')
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/my_style.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -74,7 +79,28 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container-fluid">
+                @if(session()->has('add_like'))
+                    <div class="row">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Success!</strong> {{ session()->get('add_like') }}
+                        </div>
+                    </div>
+                @endif
+
+                @if(session()->has('delete_like'))
+                    <div class="row">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Success!</strong> {{ session()->get('delete_like') }}
+                        </div>
+                    </div>
+                @endif
+
+                @yield('content')
+            </div>
+
         </main>
     </div>
 </body>

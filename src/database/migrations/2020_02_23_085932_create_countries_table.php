@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAbsentsTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAbsentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('absents', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('student_id');
-            $table->date('date');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAbsentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absents');
+        Schema::dropIfExists('countries');
     }
 }
