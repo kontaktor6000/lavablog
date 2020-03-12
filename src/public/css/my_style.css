@@ -6,4 +6,8 @@
     margin-top: 5px;
 }
 
+form .choise div.input-group-prepend {
+    min-width: 150px;
+}
+
 

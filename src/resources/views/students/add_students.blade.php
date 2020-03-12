@@ -7,24 +7,6 @@
         </div>
         <div class="col-md-9">
             <h2 style="margin-top: 10px">Форма добавления пользователя</h2>
-{{--            @if(count($errors) >  0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            @if($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-                <img src="/images/{{ Session::get('path') }}" width="300" alt="">
-            @endif--}}
-
 
             <form class="" method="post" action="{{ route('store_students') }}" enctype="multipart/form-data">
                 @csrf
@@ -66,12 +48,6 @@
                     <label for="profile_image"><strong>Выбрать фото профиля</strong></label>
                     <input type="file" id="profile_image" name="profile_image" value="{{ old('profile_image') }}">
                 </div>
-
-{{--                <div class="custom-file form-group">
-                    <input type="file" class="custom-file-input" id="profile_image"
-                           name="profile_image"  value="{{ old('profile_image') }}">
-                    <label class="custom-file-label" for="profile_image">Выбрать фото профиля</label>
-                </div>--}}
                 @if($errors->has('profile_image'))
                     <div class="alert alert-danger" role="alert">
                         {{ $errors->first('profile_image') }}
@@ -93,8 +69,9 @@
                 <div class="form-group">
                     <label for="userGender">Пол</label>
                     <select id="userGender" name="gender" class="form-control"  value="{{ old('gender') }}">
-                        <option value="man">Мужской</option>
-                        <option value="woman">Женский</option>
+                        @foreach($genders as $gender)
+                        <option value="{{ $gender->id }}">{{ $gender->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 

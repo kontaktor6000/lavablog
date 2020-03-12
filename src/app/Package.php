@@ -13,4 +13,12 @@ class Package extends Model
     {
         return $this->belongsTo('App\EventStudent', 'id', 'event_participation_package_id');
     }
+
+    public function genders()
+    {
+        return $this->belongsToMany('App\Gender',
+                                      'App\EventParticipationPackage',
+                              'package_id',
+                              'gender_id');
+    }
 }

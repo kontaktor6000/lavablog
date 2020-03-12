@@ -34,12 +34,12 @@ class Event extends Model
 
     public function students()
     {
-        return $this->belongsToMany('App\Student')->withPivot('moderation', 'event_participation_package_id');
+        return $this->belongsToMany('App\Student');
     }
 
     public function eventsstudents()
     {
-        return $this->belongsTo('App\EventStudent', 'id', 'event_id');
+        return $this->hasMany('App\EventStudent', 'event_id', 'id');
     }
 
     public function eventpackages()
@@ -52,15 +52,25 @@ class Event extends Model
                                'event_participation_package_id');
     }
 
-/*    public function package()
+    public function packages()
     {
-        return $this->hasMany('App\Package', 'id', 'event_participation_package_id');
-    }*/
+        return $this->hasManyThrough('App\Package',
+                                    'App\EventParticipationPackage',
+                                    'event_id',
+                                    'id',
+                                    'id',
+                                    'package_id');
+    }
 
-/*    public function students()
+    public function eventsParticipationPackages()
     {
-        return $this->belongsToMany('App\Student');
-    }*/
+        return $this->belongsTo('App\EventParticipationPackage', 'id', 'event_id');
+    }
+
+    public function genders()
+    {
+        return $this->hasMany('App\Gender');
+    }
 
 /*    public function eventsstudents()
     {

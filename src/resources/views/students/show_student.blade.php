@@ -70,17 +70,14 @@
 
                         <div class="form-group">
                             <label for="userGender">Пол</label>
-                            <select id="userGender" name="gender" class="form-control">
-                                <option value="man"
-                                    @if($student->gender === 'man')
+                            <select id="userGender" name="gender" class="form-control"  value="{{ old('gender') }}">
+                                @foreach($genders as $gender)
+                                    <option value="{{ $gender->id }}"
+                                        @if($student->gender_id == $gender->id)
                                         selected
-                                    @endif
-                                    >Мужской</option>
-                                <option value="woman"
-                                    @if($student->gender === 'woman')
-                                        selected
-                                    @endif
-                                >Женский</option>
+                                        @endif
+                                    >{{ $gender->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

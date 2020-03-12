@@ -9,7 +9,6 @@ class Student extends Model
 {
     protected $guarded = [];
 
-    //public $timestamps = false;
 
     protected $table = 'students';
 
@@ -53,11 +52,10 @@ class Student extends Model
                                     'event_participation_package_id');
     }
 
-
-/*    public function age()
+    public function gender()
     {
-        return $this->birthday->diffInYears(Carbon::now());
-    }*/
+        return $this->hasOne('App\Gender', 'id', 'gender_id');
+    }
 
     public function peachs()
     {
@@ -66,20 +64,8 @@ class Student extends Model
 
     public function sexualaffilation()
     {
-        return $this->hasOne('App\SexualAffilation');
+        return $this->hasOne('App\Gender');
     }
-
-/*    public function eventsstudents()
-    {
-        return $this->belongsToMany('App\EventStudent', 'event_student', 'event_id');
-    }*/
-
-
-
-
-
-
-
 
 
 

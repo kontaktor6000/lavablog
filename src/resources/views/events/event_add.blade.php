@@ -68,7 +68,7 @@
 
 
                     <div class="form-group">
-                        <label for="event_image_preview"><strong>Загрузите фотографии</strong></label>
+                        <label for="event_image_preview"><strong>Загрузите фотографию</strong></label>
                         <input type="file"
                                id="event_image_preview"
                                name="event_image_preview"
@@ -95,19 +95,51 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="basic_cost"><strong>Стоимость участия в базовом пакете</strong></label>
-                        <input type="number" class="form-control" id="basic_cost"
-                               name="basic_cost" value="{{ old('basic_cost') }}"
+
+{{--                    <div class="form-group">
+                        <label for="base_cost"><strong>Стоимость участия в базовом пакете</strong></label>
+                        <input type="number" class="form-control" id="base_cost"
+                               name="base_cost" value="{{ old('base_cost') }}"
                                placeholder="1.0" step="0.01" min="0" max="100000">
                     </div>
-                    @if($errors->has('basic_cost'))
+                    @if($errors->has('base_cost'))
                         <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('basic_cost') }}
+                            {{ $errors->first('base_cost') }}
                         </div>
-                    @endif
+                    @endif--}}
 
+                    @foreach($packages as $package)
 
+                        {{--@if(Str::lower($package->name) != 'base')--}}
+                            <div class="form-group">
+                                <label for="basic_cost">
+                                    <strong>Стоимость участия в пакете {{ Str::ucfirst(Str::lower($package->name)) }} и допустимое количество участников</strong>
+                                </label>
+                                @foreach($genders as $gender)
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><strong>{{ Str::ucfirst(Str::lower($gender->name)) }}</strong></span>
+                                        </div>
+                                        <input type="hidden" name="{{ $package->name }}_{{ $gender->name }}_package_id" value="{{ $package->id }}">
+                                        <input type="hidden" class="form-control" id="gender_id"
+                                               name="{{ $package->name }}_{{ $gender->name }}_gender_id"
+                                               value="{{ Str::lower($gender->id) }}">
+                                        <input type="number" class="form-control"
+                                               name="{{ $package->name }}_{{ $gender->name }}_cost"
+                                               value="{{--{{ old(Str::lower($package->name) . 'cost') }}--}}"
+                                               placeholder="1.0" step="0.01" min="0" max="100000">
+                                        <input type="number" class="form-control"
+                                               name="{{ $package->name }}_{{ $gender->name }}_limit"
+                                               value=""
+                                               placeholder="Колличество участников" step="1" min="0" max="100000">
+                                    </div>
+                                @endforeach
+                            </div>
+                        {{--@endif--}}
+                    @endforeach
+
+{{--
                     <div class="form-group">
                         <label for="vip_cost"><strong>Стоимость участия в VIP (вип и базовый пакеты никак не связаны с тарифами в приложении.
                             Для мужчинжчин отображается одна цена, для женщин - дороже</strong></label>
@@ -119,7 +151,8 @@
                         <div class="alert alert-danger" role="alert">
                             {{ $errors->first('vip_cost') }}
                         </div>
-                    @endif
+                    @endif--}}
+
 
                     <div class="form-group">
                         <label for="event_place"><strong>Название места проведения мероприятия</strong></label>
@@ -168,7 +201,7 @@
                         </div>
                     @endif
 
-                    <div class="form-group">
+                    {{--<div class="form-group">
                         <label for="woman_basic_member"><strong>Сколько возможно участников женщин в базовом пакете</strong></label>
                         <input type="number" class="form-control" id="woman_basic_member"
                                name="woman_basic_member" value="{{ old('woman_basic_member') }}"
@@ -214,7 +247,7 @@
                         <div class="alert alert-danger" role="alert">
                             {{ $errors->first('man_vip_member') }}
                         </div>
-                    @endif
+                    @endif--}}
 
                     <div class="form-group">
                         <label for="event_images"><strong>Загрузите фотографии</strong></label>

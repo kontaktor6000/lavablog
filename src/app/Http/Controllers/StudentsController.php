@@ -6,6 +6,7 @@ use App\AccountTariff;
 use App\City;
 use App\Event;
 use App\Exports\StudentsExport;
+use App\Gender;
 use App\Http\Requests\StoreProfileStudent;
 use App\Http\Requests\StoreProfileStudentRequest;
 use App\Like;
@@ -28,11 +29,8 @@ class StudentsController extends Controller
     public function index()
     {
         //$students = Student::paginate(5);
-        $students = Student::with('events', 'eventspackages')->get();
+        $students = Student::with('events', 'eventspackages', 'gender')->get();
         $events = Event::all();
-
-        dd($students);
-
 
         return view('students.list_students', [
             'students' => $students,
@@ -43,29 +41,23 @@ class StudentsController extends Controller
     public function show($id)
     {
         $student = Student::with('likes', 'city')->find($id);
+        $countries = Country::all();
+        $cities = City::all();
+        $genders = Gender::all();
 
-        $countries = new Country();
-        $countries = $countries::all();
-
-        $cities = new City();
-        $cities = $cities::all();
-
-        //dd($student);
-
-        return view('students.show_student', compact(['student', 'countries', 'cities']));
+        return view('students.show_student', compact(['student', 'countries', 'cities', 'genders']));
     }
 
     public function add()
     {
-        $countries = new Country();
-        $countries = $countries::all();
-
-        $cities = new City();
-        $cities = $cities::all();
+        $countries = Country::all();
+        $cities = City::all();
+        $genders = Gender::all();
 
         return view('students.add_students', [
             'countries' => $countries,
             'cities' => $cities,
+            'genders' => $genders,
         ]);
     }
 
@@ -88,7 +80,7 @@ class StudentsController extends Controller
         }
 
         $student->birthday = $request->birthday;
-        $student->gender = $request->gender;
+        $student->gender_id = $request->gender;
         $student->city_id = $request->city_id;
         $student->account_tariff_id = $accountTariffId;
 
@@ -123,7 +115,7 @@ class StudentsController extends Controller
         }
 
         $student->birthday = $request->birthday;
-        $student->gender = $request->gender;
+        $student->gender_id = $request->gender;
         $student->city_id = $request->city_id;
 
         $student->save();
@@ -271,11 +263,6 @@ class StudentsController extends Controller
         }
 
         return view('peachs.peachs_list', compact('students'));
-    }
-
-    public function getDialogs($id)
-    {
-
     }
 
     public function export()
