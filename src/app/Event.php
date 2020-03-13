@@ -13,7 +13,6 @@ class Event extends Model
         'begin_date', 'end_date',
         'begin_time', 'end_time',
         'event_image_preview', 'country_id',
-        'basic_cost', 'vip_cost',
         'event_place',
         'event_basic_description', 'event_vip_description',
         'woman_basic_member', 'man_basic_member',
@@ -64,7 +63,7 @@ class Event extends Model
 
     public function eventsParticipationPackages()
     {
-        return $this->belongsTo('App\EventParticipationPackage', 'id', 'event_id');
+        return $this->hasMany('App\EventParticipationPackage', 'event_id', 'id');
     }
 
     public function genders()
@@ -72,10 +71,5 @@ class Event extends Model
         return $this->hasMany('App\Gender');
     }
 
-/*    public function eventsstudents()
-    {
-        //return $this->belongsToMany('App\EventStudent', 'event_student')->withPivot('event_id', 'student_id');
-        return $this->hasOneThrough('App\Student', 'App\EventStudent');
-    }*/
 
 }

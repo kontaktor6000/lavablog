@@ -19,7 +19,13 @@ class PeachsController extends Controller
 
     public function delete($id)
     {
+        $peach = Peach::find($id);
+        $peach->delete();
 
+        return redirect('peachs_list');
     }
+
+
+
 
 }

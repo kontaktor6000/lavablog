@@ -11,7 +11,7 @@
                      role="group">
                     <a href="{{ route('show_student', ['id' => $student->id]) }}" class="btn btn-primary btn-block" aria-pressed="true">Просмотр профиля</a>
                     <a href="{{ route('likes_list', ['id' => $student->id]) }}" class="btn btn-primary btn-block m-0" aria-pressed="true">Список лайкнувших</a>
-                    <a href="{{ route('dialogs_list', ['id' => $student->id]) }}" class="btn btn-primary btn-block m-0" aria-pressed="true">Диалоги</a>
+                    <a href="{{ route('list_students') }}" class="btn btn-primary btn-block m-0" aria-pressed="true">Список пользователей</a>
                 </div>
 
                 <div>

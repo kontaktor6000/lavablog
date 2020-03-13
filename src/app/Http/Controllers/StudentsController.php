@@ -78,14 +78,12 @@ class StudentsController extends Controller
             $path_image = explode('/', $path_image);
             $student->profile_image = array_pop($path_image);
         }
-
         $student->birthday = $request->birthday;
         $student->gender_id = $request->gender;
         $student->city_id = $request->city_id;
         $student->account_tariff_id = $accountTariffId;
 
         $student->save();
-
         return redirect('list_students');
     }
 
@@ -118,7 +116,7 @@ class StudentsController extends Controller
         $student->gender_id = $request->gender;
         $student->city_id = $request->city_id;
 
-        $student->save();
+        $student->update();
 
         return redirect('list_students');
     }
@@ -235,8 +233,6 @@ class StudentsController extends Controller
 
     public function getPeaches()
     {
-        //$students = Student::get();
-
         $query = DB::table('students as a')
                         ->leftJoin('peachs', 'a.id', '=', 'peachs.informer_id')
                         ->leftJoin('students as b', 'b.id', '=', 'peachs.violator_id')

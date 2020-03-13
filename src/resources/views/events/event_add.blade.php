@@ -95,19 +95,6 @@
                         </select>
                     </div>
 
-
-{{--                    <div class="form-group">
-                        <label for="base_cost"><strong>Стоимость участия в базовом пакете</strong></label>
-                        <input type="number" class="form-control" id="base_cost"
-                               name="base_cost" value="{{ old('base_cost') }}"
-                               placeholder="1.0" step="0.01" min="0" max="100000">
-                    </div>
-                    @if($errors->has('base_cost'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('base_cost') }}
-                        </div>
-                    @endif--}}
-
                     @foreach($packages as $package)
 
                         {{--@if(Str::lower($package->name) != 'base')--}}
@@ -138,21 +125,6 @@
                             </div>
                         {{--@endif--}}
                     @endforeach
-
-{{--
-                    <div class="form-group">
-                        <label for="vip_cost"><strong>Стоимость участия в VIP (вип и базовый пакеты никак не связаны с тарифами в приложении.
-                            Для мужчинжчин отображается одна цена, для женщин - дороже</strong></label>
-                        <input type="number" class="form-control" id="vip_cost"
-                               name="vip_cost" value="{{ old('vip_cost') }}"
-                               placeholder="1.0" step="0.01" min="0" max="100000">
-                    </div>
-                    @if($errors->has('vip_cost'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('vip_cost') }}
-                        </div>
-                    @endif--}}
-
 
                     <div class="form-group">
                         <label for="event_place"><strong>Название места проведения мероприятия</strong></label>
@@ -201,54 +173,6 @@
                         </div>
                     @endif
 
-                    {{--<div class="form-group">
-                        <label for="woman_basic_member"><strong>Сколько возможно участников женщин в базовом пакете</strong></label>
-                        <input type="number" class="form-control" id="woman_basic_member"
-                               name="woman_basic_member" value="{{ old('woman_basic_member') }}"
-                               placeholder="167" step="1" min="0" max="100000">
-                    </div>
-                    @if($errors->has('woman_basic_member'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('woman_basic_member') }}
-                        </div>
-                    @endif
-
-                    <div class="form-group">
-                        <label for="man_basic_member"><strong>Сколько возможно участников мужчин в базовом пакете</strong></label>
-                        <input type="number" class="form-control" id="man_basic_member"
-                               name="man_basic_member" value="{{ old('man_basic_member') }}"
-                               placeholder="1" step="1" min="0" max="100000">
-                    </div>
-                    @if($errors->has('man_basic_member'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('man_basic_member') }}
-                        </div>
-                    @endif
-
-                    <div class="form-group">
-                        <label for="woman_vip_member"><strong>Сколько возможно участников женщин в пакете VIP</strong></label>
-                        <input type="number" class="form-control" id="woman_vip_member"
-                               name="woman_vip_member" value="{{ old('woman_vip_member') }}"
-                               placeholder="1" step="1" min="0" max="100000">
-                    </div>
-                    @if($errors->has('woman_vip_member'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('woman_vip_member') }}
-                        </div>
-                    @endif
-
-                    <div class="form-group">
-                        <label for="man_vip_member"><strong>Сколько возможно участников мужчин в пакете VIP</strong></label>
-                        <input type="number" class="form-control" id="man_vip_member"
-                               name="man_vip_member" value="{{ old('man_vip_member') }}"
-                               placeholder="1" step="1" min="0" max="100000">
-                    </div>
-                    @if($errors->has('man_vip_member'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('man_vip_member') }}
-                        </div>
-                    @endif--}}
-
                     <div class="form-group">
                         <label for="event_images"><strong>Загрузите фотографии</strong></label>
                         <input type="file"
@@ -287,33 +211,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $('form').ajaxForm({
-                beforeSend:function () {
-                    $('#success').empty();
-                    $('.progress-bar').text('0%');
-                    $('.progress-bar').css('width', '0%');
-                },
-                uploadProgress:function (event, position, total, percentComplete) {
-                    $('.progress-bar').text(percentComplete + '0%');
-                    $('.progress-bar').css('width', percentComplete + '0%');
-                },
-                success:function (data) {
-                    if (data.success)
-                    {
-                        $('#success').html('<div class="text-success text-center"><b>'
-                                            + data.success +
-                                            '</b></div><br><br>');
-                        $('#success').append(data.event_images);
-                        $('.progress-bar').text('Uploaded');
-                        $('.progress-bar').css('width', '100%');
-                    }
-                }
-            });
-        });
-    </script>
 
 @endsection()
 

@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-10">
                 <div class="btn-group col-12 no-gutters" role="group">
-                    <a href="{{ route('event_add') }}" class="btn btn-dark" >Изменить данные мероприятия</a>
+                    <a href="{{ route('event_edit', ['id' => $event->id]) }}" class="btn btn-dark" >Изменить данные мероприятия</a>
                 </div>
                 <h2 style="margin-top: 20px">Мероприятие</h2>
                 <table class="table">

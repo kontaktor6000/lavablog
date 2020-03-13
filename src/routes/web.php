@@ -35,16 +35,14 @@ Route::get('/download_students', 'StudentsController@export')->name('download_st
 Route::get('/filter_students', 'StudentsController@filter')->name('filter_students');
 
 Route::get('/peachs_list', 'StudentsController@getPeaches')->name('peachs_list');
-Route::get('/peach_delete/{id}', 'StudentsController@deletePeach')->name('peach_delete');
-
-/*Route::get('/download_students', function () {
-    return Excel::download(new StudentsExport(), 'students.xlsx');
-})->name('download_students');*/
+Route::get('/peach_delete/{id}', 'PeachsController@delete')->name('peach_delete');
 
 Route::get('/events_list', 'EventsController@index')->name('events_list');
 Route::get('/event_add', 'EventsController@add')->name('event_add');
 Route::post('/event_store', 'EventsController@store')->name('event_store');
 Route::get('/event_show/{id}', 'EventsController@show')->name('event_show');
+Route::get('/event_edit/{id}', 'EventsController@edit')->name('event_edit');
+Route::post('/event_update/{id}', 'EventsController@update')->name('event_update');
 Route::get('/event_members_list/{id}', 'EventsController@getEventMembersList')->name('event_members_list');
 Route::get('/event_delete/{id}', 'EventsController@delete')->name('event_delete');
 Route::get('/event_member_delete/{id}', 'EventsController@deleteMember')->name('event_member_delete');

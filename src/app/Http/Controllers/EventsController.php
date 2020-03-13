@@ -123,9 +123,75 @@ class EventsController extends Controller
         $event = $query->first();
         $packages = $query2->distinct()->get();
 
-        //dd($event, $packages);
-
         return view('events.event_show', compact(['event', 'packages']));
+    }
+
+    public function edit($id)
+    {
+        $event = Event::with('eventsParticipationPackages')->find($id);
+        $countries = Country::all();
+        $packages = Package::with('eventsParticipationPackages')->get();
+        $genders = Gender::all();
+        $eventParticipationPackage = EventParticipationPackage::with('genders')
+                                                                ->where('event_id', '=', $id)->get();
+        //dd($eventParticipationPackage);
+        //dd($event);
+
+        return view('events.event_edit', compact(['event', 'countries', 'packages', 'genders', 'eventParticipationPackage']));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $eventPhotos = new EventPhoto();
+        $eventParticipationPackage = new EventParticipationPackage();
+        $packages = Package::all();
+        $genders = Gender::all();
+
+        $event->event_name = $request['event_name'];
+        $event->begin_date = $request['begin_date'];
+        $event->end_date = $request['end_date'];
+        $event->begin_time = $request['begin_time'];
+        $event->end_time = $request['end_time'];
+
+        if ($request['event_image_preview']) {
+            $event->event_image_preview = self::storeImage($request['event_image_preview']);
+        }
+        if (!$event->event_image_preview) {
+            $path_image = Storage::url('no-image.png');
+            $path_image = explode('/', $path_image);
+            $event->event_image_preview = array_pop($path_image);
+        }
+
+        $event->country_id = $request['country_id'];
+        $event->event_place = $request['event_place'];
+        $event->event_basic_description = $request['event_basic_description'];
+        $event->event_vip_description = $request['event_vip_description'];
+        $event->event_video = $request['event_video'];
+
+        $event->save();
+        $eventId = $event->id;
+
+        foreach ($packages as $package) {
+            foreach ($genders as $gender) {
+                $epp = EventParticipationPackage::create([
+                    'event_id' => $eventId,
+                    'package_id' => $request[$package->name . '_' . $gender->name . '_package_id'],
+                    'gender_id' => $request[$package->name . '_' . $gender->name . '_gender_id'],
+                    'cost' => $request[$package->name . '_' . $gender->name . '_cost'],
+                    'number_of_participants' => $request[$package->name . '_' . $gender->name . '_limit'],
+                ]);
+            }
+        }
+
+        foreach ($request['event_images'] as $eventPhoto) {
+            EventPhoto::create([
+                'event_id' => $eventId,
+                'photo' => self::storeImage($eventPhoto),
+            ]);
+        }
+
+        return redirect('events_list');
     }
 
     public function getEventMembersList($id)
@@ -166,7 +232,6 @@ class EventsController extends Controller
     {
 
     }
-
 
     private function storeImage($image)
     {
